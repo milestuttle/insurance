@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insurance Comparison Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="header-content">
+        <h1>Carrier Comparison Tool</h1>
+        <p>Evaluate rates and coverage across CEBT, PERACare, and CEC.</p>
+        <div class="legend">
+          <span class="legend-item"><span class="swatch current"></span> Current Provider (CEBT)</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      
+      <section class="controls-section">
+        <div class="control-group">
+          <label for="emp-contrib">Employer Contribution ($/mo):</label>
+          <input type="number" id="emp-contrib" value="0" min="0" step="50" style="width: 140px;">
+        </div>
+        <div class="control-group">
+          <label>Cost View:</label>
+          <div class="segmented-control" id="cost-view-buttons">
+            <button class="seg-btn active" data-view="monthly">Monthly</button>
+            <button class="seg-btn" data-view="annual-low">Low TCO</button>
+            <button class="seg-btn" data-view="annual-med">Med TCO</button>
+            <button class="seg-btn" data-view="annual-high">High TCO</button>
+          </div>
+          <div id="cost-view-help" class="help-text">Shows the raw monthly premium minus employer contributions.</div>
+        </div>
+        <div class="control-group filter-group">
+          <span class="control-label">Select carriers to view:</span>
+          <div id="carrier-filters" class="checkbox-group"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" style="opacity:0">Focus</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="focus-mode-btn" class="btn-secondary">Focus Mode: OFF</button>
+            <button id="diff-only-btn" class="btn-secondary">Differences Only: OFF</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>Premium Overview</h2>
+          <p class="section-desc">Monthly premium costs by tier.</p>
+        </div>
+        <div class="cards-grid" id="cards-container">
+          <!-- Plan cards inject here -->
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>Detailed Coverage Comparison</h2>
+          <p class="section-desc">Side-by-side view of benefits and limits.</p>
+        </div>
+        <div class="table-wrapper">
+          <table class="comparison-table" id="comparison-table">
+            <thead>
+              <tr id="table-head-row">
+                <th class="sticky-col">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding-right: 0.5rem;">
+                    <span>Benefit Category</span>
+                    <button id="reset-sort-btn" class="btn-text" style="display: none; font-size: 0.75rem;">Reset Sort ↺</button>
+                  </div>
+                </th>
+                <!-- Headers inject here -->
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Rows inject here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Confidential & Proprietary. Built for Internal Review.</p>
+    </footer>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
