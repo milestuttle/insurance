@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
   <div class="app-container">
     <header class="header">
@@ -22,7 +24,7 @@
     </header>
 
     <main class="main-content">
-      
+
       <section class="controls-section">
         <div class="control-group">
           <label for="emp-contrib">Employer Contribution ($/mo):</label>
@@ -32,9 +34,9 @@
           <label>Cost View:</label>
           <div class="segmented-control" id="cost-view-buttons">
             <button class="seg-btn active" data-view="monthly">Monthly</button>
-            <button class="seg-btn" data-view="annual-low">Low TCO</button>
-            <button class="seg-btn" data-view="annual-med">Med TCO</button>
-            <button class="seg-btn" data-view="annual-high">High TCO</button>
+            <button class="seg-btn" data-view="annual-low">Low Utilization</button>
+            <button class="seg-btn" data-view="annual-med">Medium Utilization</button>
+            <button class="seg-btn" data-view="annual-high">High Utilization</button>
           </div>
           <div id="cost-view-help" class="help-text">Shows the raw monthly premium minus employer contributions.</div>
         </div>
@@ -71,9 +73,11 @@
             <thead>
               <tr id="table-head-row">
                 <th class="sticky-col">
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding-right: 0.5rem;">
+                  <div
+                    style="display: flex; justify-content: space-between; align-items: center; padding-right: 0.5rem;">
                     <span>Benefit Category</span>
-                    <button id="reset-sort-btn" class="btn-text" style="display: none; font-size: 0.75rem;">Reset Sort ↺</button>
+                    <button id="reset-sort-btn" class="btn-text" style="display: none; font-size: 0.75rem;">Reset Sort
+                      ↺</button>
                   </div>
                 </th>
                 <!-- Headers inject here -->
@@ -94,4 +98,5 @@
 
   <script type="module" src="app.js"></script>
 </body>
+
 </html>
