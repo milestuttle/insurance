@@ -340,7 +340,7 @@ th.sticky-col {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  width: fit-content;
+  width: 100%;
   gap: 2rem;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
