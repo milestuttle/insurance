@@ -44,19 +44,19 @@
           <span class="control-label">Select carriers to view:</span>
           <div id="carrier-filters" class="checkbox-group"></div>
         </div>
-        <div class="control-group">
-          <label class="control-label" style="opacity:0">Focus</label>
-          <div style="display: flex; gap: 0.5rem;">
-            <button id="focus-mode-btn" class="btn-secondary">Focus Mode: OFF</button>
-            <button id="diff-only-btn" class="btn-secondary">Differences Only: OFF</button>
-          </div>
-        </div>
+
       </section>
 
       <section class="section">
-        <div class="section-header">
-          <h2>Premium Overview</h2>
-          <p class="section-desc">Monthly premium costs by tier.</p>
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+          <div>
+            <h2>Premium Overview</h2>
+            <p class="section-desc" style="margin-bottom: 0;">Monthly premium costs by tier.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="focus-mode-btn" class="btn-secondary">Compare Mode: OFF</button>
+            <button id="diff-only-btn" class="btn-secondary">Differences Only: OFF</button>
+          </div>
         </div>
         <div class="cards-grid" id="cards-container">
           <!-- Plan cards inject here -->

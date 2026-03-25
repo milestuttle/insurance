@@ -150,10 +150,10 @@ function initControls() {
   focusBtn.addEventListener('click', () => {
     focusMode = !focusMode;
     if (focusMode) {
-      focusBtn.textContent = "Focus Mode: ON";
+      focusBtn.textContent = "Compare Mode: ON";
       focusBtn.classList.add('active');
     } else {
-      focusBtn.textContent = "Focus Mode: OFF";
+      focusBtn.textContent = "Compare Mode: OFF";
       focusBtn.classList.remove('active');
     }
     renderCards();
@@ -223,7 +223,7 @@ function renderCards() {
       
       const isSelected = selectedForCompare.has(plan.planName);
       card.innerHTML = `
-        <label class="card-checkbox-label" title="Select for Focus Mode">
+        <label class="card-checkbox-label" title="Select for Compare Mode">
           <input type="checkbox" class="compare-checkbox" value="${plan.planName}" ${isSelected ? 'checked' : ''} /> Compare
         </label>
       `;
@@ -293,7 +293,7 @@ function renderCards() {
   });
 
   if (!anyVisible) {
-    container.innerHTML = `<div style="padding: 3rem; text-align: center; color: var(--text-secondary);">No plans available. Try selecting more carriers or checking 'Compare' on cards before enabling Focus Mode.</div>`;
+    container.innerHTML = `<div style="padding: 3rem; text-align: center; color: var(--text-secondary);">No plans available. Try selecting more carriers or checking 'Compare' on cards before enabling Compare Mode.</div>`;
   }
 }
 
