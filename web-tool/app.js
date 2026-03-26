@@ -65,6 +65,8 @@ const formatCurrency = (num) => {
 
 // Sort function mutates the insuranceData array
 const carrierOrder = { "CEBT": 1, "PERACare": 2, "CEC": 3 };
+const carrierDisplayNames = { "CEC": "CEC/Harbor Bridge" };
+const displayName = (carrier) => carrierDisplayNames[carrier] || carrier;
 const sortInsuranceData = () => {
   insuranceData.sort((a, b) => {
     let valA, valB;
@@ -118,7 +120,7 @@ function initControls() {
     });
     
     label.appendChild(cb);
-    label.append(" " + carrier);
+    label.append(" " + displayName(carrier));
     filterContainer.appendChild(label);
   });
 
@@ -206,7 +208,7 @@ function renderCards() {
 
     // Carrier section title
     const rowTitle = document.createElement('h3');
-    rowTitle.textContent = carrier + " Plans";
+    rowTitle.textContent = displayName(carrier) + " Plans";
     rowTitle.style.marginTop = index === 0 ? '0' : '3rem';
     rowTitle.style.marginBottom = '1.5rem';
     rowTitle.style.fontWeight = '600';
@@ -253,7 +255,7 @@ function renderCards() {
 
       content.innerHTML = `
         <div class="card-header">
-          <span class="carrier-badge">${plan.carrier}</span>
+          <span class="carrier-badge">${displayName(plan.carrier)}</span>
           <h3 class="card-title">${plan.planName}</h3>
         </div>
         <ul class="premium-list">
@@ -330,7 +332,7 @@ function renderTable() {
       th.style.textDecorationColor = 'currentColor';
       th.style.textUnderlineOffset = '4px';
     }
-    th.innerHTML = `${plan.carrier}<br><span style="font-size:0.75rem;font-weight:400;text-transform:none;">${plan.planName}</span>`;
+    th.innerHTML = `${displayName(plan.carrier)}<br><span style="font-size:0.75rem;font-weight:400;text-transform:none;">${plan.planName}</span>`;
     headRow.appendChild(th);
   });
   
