@@ -11,6 +11,7 @@ let costView = "monthly"; // "monthly", "annual-low", "annual-med", "annual-high
 let focusMode = false;
 let selectedForCompare = new Set();
 let hideIdenticalRows = false;
+let baselineMode = true;
 let sortMetric = "carrier_then_premium"; // or "deductible", "coinsurance", etc.
 let sortAscending = true;
 
@@ -165,6 +166,20 @@ function initControls() {
     renderTable();
   });
 
+  const baselineBtn = document.getElementById('baseline-mode-btn');
+  baselineBtn.addEventListener('click', () => {
+    baselineMode = !baselineMode;
+    if (baselineMode) {
+      baselineBtn.textContent = "Baseline Mode: ON";
+      baselineBtn.classList.add('active');
+    } else {
+      baselineBtn.textContent = "Baseline Mode: OFF";
+      baselineBtn.classList.remove('active');
+    }
+    renderTables();
+    renderTable();
+  });
+
   const diffBtn = document.getElementById('diff-only-btn');
   diffBtn.addEventListener('click', () => {
     hideIdenticalRows = !hideIdenticalRows;
@@ -196,6 +211,7 @@ function renderTables() {
   const carriers = [...new Set(insuranceData.map(p => p.carrier))];
 
   const getDiffHtml = (tier, plan) => {
+    if (!baselineMode) return '';
     if (plan.planName === baselinePlanName) return `<span class="diff-badge diff-neutral">Baseline</span>`;
     const diff = getCalculatedCost(plan, tier) - getCalculatedCost(baselinePlan, tier);
     if (Math.abs(diff) < 1) return `<span class="diff-badge diff-neutral">$0</span>`;
@@ -244,10 +260,11 @@ function renderTables() {
     const tbody = document.createElement('tbody');
     carrierPlans.forEach(plan => {
       const tr = document.createElement('tr');
-      if (plan.planName === baselinePlanName) tr.classList.add('pt-baseline');
+      if (baselineMode && plan.planName === baselinePlanName) tr.classList.add('pt-baseline');
 
       tr.addEventListener('click', (e) => {
         if (e.target.type === 'checkbox') return;
+        if (!baselineMode) return;
         baselinePlanName = plan.planName;
         renderTables();
         renderTable();
@@ -323,7 +340,7 @@ function renderTable() {
   visiblePlans.forEach(plan => {
     const th = document.createElement('th');
     th.classList.add(`col-${plan.carrier}`, `header-${plan.carrier}`);
-    if (plan.planName === baselinePlanName) {
+    if (baselineMode && plan.planName === baselinePlanName) {
       th.style.textDecoration = 'underline';
       th.style.textDecorationColor = 'currentColor';
       th.style.textUnderlineOffset = '4px';
