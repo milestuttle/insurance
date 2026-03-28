@@ -1,4 +1,4 @@
-import insuranceData from './data.js';
+import insuranceData, { carrierFeatures } from './data.js';
 
 // Clean up any trailing spaces from CSV
 insuranceData.forEach(p => p.planName = p.planName.trim());
@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initControls();
   renderTables();
   renderTable();
+  renderCarrierFeatures();
 });
 
 function initControls() {
@@ -440,7 +441,68 @@ function renderTable() {
       
       tr.appendChild(td);
     });
-    
+
     tbody.appendChild(tr);
   });
+}
+
+function renderCarrierFeatures() {
+  const container = document.getElementById('carrier-features-container');
+  const carriers = ['CEBT', 'PERACare', 'CEC'];
+
+  const table = document.createElement('table');
+  table.className = 'comparison-table';
+
+  // thead
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+
+  const thFeature = document.createElement('th');
+  thFeature.className = 'sticky-col';
+  thFeature.textContent = 'Feature';
+  headerRow.appendChild(thFeature);
+
+  carriers.forEach(carrier => {
+    const th = document.createElement('th');
+    th.classList.add(`col-${carrier}`, `header-${carrier}`);
+    th.textContent = displayName(carrier);
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // tbody
+  const tbody = document.createElement('tbody');
+  carrierFeatures.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.style.cursor = 'pointer';
+    tr.addEventListener('click', () => tr.classList.toggle('cf-open'));
+
+    // Feature label cell
+    const tdLabel = document.createElement('td');
+    tdLabel.className = 'sticky-col';
+    tdLabel.innerHTML = `<span class="cf-chevron">&#9662;</span>${escapeHtml(row.feature)}`;
+    tr.appendChild(tdLabel);
+
+    // Carrier cells
+    carriers.forEach(carrier => {
+      const cell = row.carriers[carrier];
+      const td = document.createElement('td');
+      td.classList.add(`col-${carrier}`);
+      const tagHtml = cell.tag
+        ? `<br><span class="cf-tag cf-tag-${carrier}">${escapeHtml(cell.tag)}</span>`
+        : '';
+      td.innerHTML = `<div class="cf-headline">${escapeHtml(cell.headline)}</div>` +
+                     `<div class="cf-detail">${escapeHtml(cell.detail)}${tagHtml}</div>`;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-wrapper';
+  wrapper.appendChild(table);
+  container.appendChild(wrapper);
 }
