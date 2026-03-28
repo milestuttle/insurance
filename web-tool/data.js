@@ -329,10 +329,10 @@ export const carrierFeatures = [
     }
   },
   {
-    feature: "Admin Burden & HR Support",
+    feature: "Admin Burden & Support",
     carriers: {
-      CEBT:     { headline: "Standard \u00b7 HR manages",      detail: "Your district HR team manages open enrollment, carrier files, COBRA, and general benefits administration." },
-      PERACare: { headline: "Very low \u00b7 PERA handles it", detail: "Acts as an extension of HR. PERA handles enrollment files, premium billing, and COBRA administration directly." },
+      CEBT:     { headline: "Standard \u00b7 District Manages", detail: "Your district manages open enrollment, carrier files, COBRA, and general benefits administration." },
+      PERACare: { headline: "Very low \u00b7 PERA handles it", detail: "PERA handles enrollment files, premium billing, and COBRA administration directly." },
       CEC:      { headline: "Supported via tech platform",   detail: "Provides a proprietary digital Benefit Management System and dedicated enrollment coordinators to help manage complexity." }
     }
   },
