@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sortInsuranceData();
   if (insuranceData.length > 0) baselinePlanName = insuranceData[0].planName;
   initControls();
-  renderCards();
+  renderTables();
   renderTable();
 });
 
@@ -118,7 +118,7 @@ function initControls() {
     cb.addEventListener('change', (e) => {
       if (e.target.checked) enabledCarriers.add(carrier);
       else enabledCarriers.delete(carrier);
-      renderCards();
+      renderTables();
       renderTable();
     });
     
@@ -129,7 +129,7 @@ function initControls() {
 
   document.getElementById('emp-contrib').addEventListener('input', (e) => {
     employerContribution = parseFloat(e.target.value) || 0;
-    renderCards();
+    renderTables();
   });
 
   const costHelp = document.getElementById('cost-view-help');
@@ -147,7 +147,7 @@ function initControls() {
       e.target.classList.add('active');
       costView = e.target.dataset.view;
       costHelp.textContent = explanations[costView];
-      renderCards();
+      renderTables();
     });
   });
 
@@ -161,10 +161,10 @@ function initControls() {
       focusBtn.textContent = "Compare Mode: OFF";
       focusBtn.classList.remove('active');
     }
-    renderCards();
+    renderTables();
     renderTable();
   });
-  
+
   const diffBtn = document.getElementById('diff-only-btn');
   diffBtn.addEventListener('click', () => {
     hideIdenticalRows = !hideIdenticalRows;
@@ -183,123 +183,116 @@ function initControls() {
     sortMetric = "carrier_then_premium";
     sortAscending = true;
     sortInsuranceData();
-    renderCards();
+    renderTables();
     renderTable();
   });
 }
 
-function renderCards() {
+function renderTables() {
   const container = document.getElementById('cards-container');
   container.innerHTML = '';
 
   const baselinePlan = insuranceData.find(p => p.planName === baselinePlanName) || insuranceData[0];
   const carriers = [...new Set(insuranceData.map(p => p.carrier))];
 
-  let anyVisible = false;
+  const getDiffHtml = (tier, plan) => {
+    if (plan.planName === baselinePlanName) return `<span class="diff-badge diff-neutral">Baseline</span>`;
+    const diff = getCalculatedCost(plan, tier) - getCalculatedCost(baselinePlan, tier);
+    if (Math.abs(diff) < 1) return `<span class="diff-badge diff-neutral">$0</span>`;
+    if (diff > 0) return `<span class="diff-badge diff-negative">+$${Math.abs(diff).toFixed(0)}</span>`;
+    return `<span class="diff-badge diff-positive">-$${Math.abs(diff).toFixed(0)}</span>`;
+  };
 
-  carriers.forEach((carrier, index) => {
+  let anyVisible = false;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'premium-tables-wrapper';
+
+  carriers.forEach((carrier) => {
     if (!enabledCarriers.has(carrier)) return;
 
     let carrierPlans = insuranceData.filter(p => p.carrier === carrier);
     if (focusMode) {
       carrierPlans = carrierPlans.filter(p => selectedForCompare.has(p.planName));
     }
-
     if (carrierPlans.length === 0) return;
     anyVisible = true;
 
-    // Carrier section title
-    const rowTitle = document.createElement('h3');
-    rowTitle.textContent = displayName(carrier) + " Plans";
-    rowTitle.className = index === 0 ? 'carrier-section-title first-carrier' : 'carrier-section-title';
-    
-    const grid = document.createElement('div');
-    grid.className = 'cards-grid';
-    
+    const section = document.createElement('div');
+    section.className = 'premium-table-section';
+
+    const carrierLabel = document.createElement('div');
+    carrierLabel.className = 'premium-carrier-label';
+    carrierLabel.textContent = displayName(carrier) + ' Plans';
+    section.appendChild(carrierLabel);
+
+    const table = document.createElement('table');
+    table.className = 'premium-table';
+
+    // thead
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    [['Plan', false], ['EE Only', true], ['+ Spouse', true], ['+ Child', true], ['Family', true]].forEach(([text, alignRight]) => {
+      const th = document.createElement('th');
+      th.textContent = text;
+      if (alignRight) th.classList.add('pt-col-right');
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // tbody
+    const tbody = document.createElement('tbody');
     carrierPlans.forEach(plan => {
-      const card = document.createElement('div');
-      card.className = `plan-card provider-${plan.carrier}`;
-      
-      const isSelected = selectedForCompare.has(plan.planName);
-      const checkboxLabel = document.createElement('label');
-      checkboxLabel.className = 'card-checkbox-label';
-      checkboxLabel.title = 'Select for Compare Mode';
-      const checkboxInput = document.createElement('input');
-      checkboxInput.type = 'checkbox';
-      checkboxInput.className = 'compare-checkbox';
-      checkboxInput.value = plan.planName;
-      checkboxInput.checked = isSelected;
-      checkboxLabel.appendChild(checkboxInput);
-      checkboxLabel.appendChild(document.createTextNode(' Compare'));
-      card.appendChild(checkboxLabel);
+      const tr = document.createElement('tr');
+      if (plan.planName === baselinePlanName) tr.classList.add('pt-baseline');
 
-      // The rest of the card content
-      const content = document.createElement('div');
-      content.style.cursor = 'pointer';
-      content.title = "Click to set as Baseline comparison plan";
-      
-      if (plan.planName === baselinePlanName) {
-        card.style.boxShadow = "0 0 0 3px var(--accent-indigo)";
-      }
-
-      content.addEventListener('click', () => {
+      tr.addEventListener('click', (e) => {
+        if (e.target.type === 'checkbox') return;
         baselinePlanName = plan.planName;
-        renderCards();
+        renderTables();
         renderTable();
       });
-      
-      const getDiffHtml = (tier) => {
-        if (plan.planName === baselinePlanName) return `<span class="diff-badge diff-neutral">Baseline</span>`;
-        const diff = getCalculatedCost(plan, tier) - getCalculatedCost(baselinePlan, tier);
-        if (Math.abs(diff) < 1) return `<span class="diff-badge diff-neutral">$0</span>`;
-        if (diff > 0) return `<span class="diff-badge diff-negative">+$${Math.abs(diff).toFixed(0)}</span>`;
-        return `<span class="diff-badge diff-positive">-$${Math.abs(diff).toFixed(0)}</span>`;
-      };
 
-      content.innerHTML = `
-        <div class="card-header">
-          <span class="carrier-badge">${escapeHtml(displayName(plan.carrier))}</span>
-          <h3 class="card-title">${escapeHtml(plan.planName)}</h3>
-        </div>
-        <ul class="premium-list">
-          <li class="premium-item">
-            <span class="premium-label">EE Only</span>
-            <div><span class="premium-val">${formatCurrency(getCalculatedCost(plan, 'eeOnly'))}</span> ${getDiffHtml('eeOnly')}</div>
-          </li>
-          <li class="premium-item">
-            <span class="premium-label">EE + Spouse</span>
-            <div><span class="premium-val">${formatCurrency(getCalculatedCost(plan, 'eeSpouse'))}</span> ${getDiffHtml('eeSpouse')}</div>
-          </li>
-          <li class="premium-item">
-            <span class="premium-label">EE + Child</span>
-            <div><span class="premium-val">${formatCurrency(getCalculatedCost(plan, 'eeChild'))}</span> ${getDiffHtml('eeChild')}</div>
-          </li>
-          <li class="premium-item">
-            <span class="premium-label">Family</span>
-            <div><span class="premium-val">${formatCurrency(getCalculatedCost(plan, 'family'))}</span> ${getDiffHtml('family')}</div>
-          </li>
-        </ul>
-      `;
-      card.appendChild(content);
-      
-      // Bind checkbox
-      const cb = card.querySelector('.compare-checkbox');
+      // Name cell: checkbox + plan name
+      const nameTd = document.createElement('td');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'pt-checkbox';
+      cb.title = 'Select for Compare Mode';
+      cb.checked = selectedForCompare.has(plan.planName);
       cb.addEventListener('change', (e) => {
         if (e.target.checked) selectedForCompare.add(plan.planName);
         else selectedForCompare.delete(plan.planName);
-        if (focusMode) { renderCards(); renderTable(); }
+        if (focusMode) { renderTables(); renderTable(); }
+      });
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'pt-plan-name';
+      nameSpan.textContent = plan.planName;
+      nameTd.appendChild(cb);
+      nameTd.appendChild(nameSpan);
+      tr.appendChild(nameTd);
+
+      // Tier cells
+      ['eeOnly', 'eeSpouse', 'eeChild', 'family'].forEach(tier => {
+        const td = document.createElement('td');
+        td.classList.add('pt-col-right');
+        td.innerHTML = `${escapeHtml(formatCurrency(getCalculatedCost(plan, tier)))} ${getDiffHtml(tier, plan)}`;
+        tr.appendChild(td);
       });
 
-      grid.appendChild(card);
+      tbody.appendChild(tr);
     });
-
-    container.appendChild(rowTitle);
-    container.appendChild(grid);
+    table.appendChild(tbody);
+    section.appendChild(table);
+    wrapper.appendChild(section);
   });
 
   if (!anyVisible) {
     container.innerHTML = `<div style="padding: 3rem; text-align: center; color: var(--text-secondary);">No plans available. Try selecting more carriers or checking 'Compare' on cards before enabling Compare Mode.</div>`;
+    return;
   }
+
+  container.appendChild(wrapper);
 }
 
 function renderTable() {
@@ -395,7 +388,7 @@ function renderTable() {
         sortAscending = true;
       }
       sortInsuranceData();
-      renderCards();
+      renderTables();
       renderTable();
     });
     
