@@ -63,6 +63,195 @@ const insuranceData = [
     }
   },
   {
+    carrier: "CEC",
+    planName: "HSA6000 1700/3420",
+    premiums: {
+      eeOnly: "$753.00",
+      eeSpouse: "$1,505.00",
+      eeChild: "$1,281.00",
+      family: "$1,934.00"
+    },
+    coverage: {
+      officeVisit: "$30",
+      specialist: "$50",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$75",
+      deductible: "$1700/$3400",
+      maxOop: "$3,420/$6,840",
+      coinsurance: "60%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "HSA6000 1700/3850",
+    premiums: {
+      eeOnly: "$737.00",
+      eeSpouse: "$1,472.00",
+      eeChild: "$1,253.00",
+      family: "$1,892.00"
+    },
+    coverage: {
+      officeVisit: "$30",
+      specialist: "$50",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$75",
+      deductible: "$1700/$3400",
+      maxOop: "$3,850/$7,700",
+      coinsurance: "50%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "HSA6000 6000/6000",
+    premiums: {
+      eeOnly: "$675.00",
+      eeSpouse: "$1,349.00",
+      eeChild: "$1,148.00",
+      family: "$1,734.00"
+    },
+    coverage: {
+      officeVisit: "$30",
+      specialist: "$50",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$75",
+      deductible: "$6,000/$12,000",
+      maxOop: "$6,000/$12,000",
+      coinsurance: "100%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "Simplicity 1000/1000",
+    premiums: {
+      eeOnly: "$909.00",
+      eeSpouse: "$1,817.00",
+      eeChild: "$1,546.00",
+      family: "$2,335.00"
+    },
+    coverage: {
+      officeVisit: "$0",
+      specialist: "$0",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$0",
+      deductible: "$1,000/$2,000",
+      maxOop: "$2,000/$2,000",
+      coinsurance: "50%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "Simplicity 1000/3000",
+    premiums: {
+      eeOnly: "$849.00",
+      eeSpouse: "$1,699.00",
+      eeChild: "$1,447.00",
+      family: "$2,184.00"
+    },
+    coverage: {
+      officeVisit: "$0",
+      specialist: "$0",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$0",
+      deductible: "$1,000/$2,000",
+      maxOop: "$3,000/$6,000",
+      coinsurance: "50%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "Simplicity 1000/5000",
+    premiums: {
+      eeOnly: "$713.00",
+      eeSpouse: "$1,426.00",
+      eeChild: "$1,214.00",
+      family: "$1,833.00"
+    },
+    coverage: {
+      officeVisit: "$0",
+      specialist: "$0",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$0",
+      deductible: "$1,000/$2,000",
+      maxOop: "$5,000/$10,000",
+      coinsurance: "50%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "Traditional 1500/1500",
+    premiums: {
+      eeOnly: "$883.00",
+      eeSpouse: "$1,764.00",
+      eeChild: "$1,501.00",
+      family: "$2,267.00"
+    },
+    coverage: {
+      officeVisit: "$30",
+      specialist: "$50",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$75",
+      deductible: "$1,500/$3,000",
+      maxOop: "$1,500/$3,000",
+      coinsurance: "30%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "Traditional 2500/2500",
+    premiums: {
+      eeOnly: "$824.00",
+      eeSpouse: "$1,647.00",
+      eeChild: "$1,402.00",
+      family: "$2,117.00"
+    },
+    coverage: {
+      officeVisit: "$30",
+      specialist: "$50",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$75",
+      deductible: "$2,500/$5,000",
+      maxOop: "$2,500/$5,000",
+      coinsurance: "30%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
+    carrier: "CEC",
+    planName: "Traditional 5000/5000",
+    premiums: {
+      eeOnly: "$595.00",
+      eeSpouse: "$1,190.00",
+      eeChild: "$1,071.00",
+      family: "$1,725.00"
+    },
+    coverage: {
+      officeVisit: "$30",
+      specialist: "$50",
+      inpatient: "Ded + 50%",
+      outpatient: "Ded + 50%",
+      urgentCare: "$75",
+      deductible: "$5,000/$10,000",
+      maxOop: "$5,000/$10,000",
+      coinsurance: "30%",
+      prescriptions: "$0/$75/$100"
+    }
+  },
+  {
     carrier: "PERACare",
     planName: "Kaiser EDCP",
     premiums: {
@@ -102,69 +291,6 @@ const insuranceData = [
       maxOop: "$6,050/$12,100",
       coinsurance: "20%",
       prescriptions: "$10/$50/50%"
-    }
-  },
-  {
-    carrier: "CEC",
-    planName: "Simplicity 1000/3000",
-    premiums: {
-      eeOnly: "$849.00",
-      eeSpouse: "$1,699.00",
-      eeChild: "$1,447.00",
-      family: "$2,184.00"
-    },
-    coverage: {
-      officeVisit: "$0",
-      specialist: "$0",
-      inpatient: "Ded + 50%",
-      outpatient: "Ded + 50%",
-      urgentCare: "$0",
-      deductible: "$1,000 / $2,000",
-      maxOop: "$3,000 / $6,000",
-      coinsurance: "50%",
-      prescriptions: "$20/$40/$60"
-    }
-  },
-  {
-    carrier: "CEC",
-    planName: "Simplicity 1000/5000",
-    premiums: {
-      eeOnly: "$713.00",
-      eeSpouse: "$1,426.00",
-      eeChild: "$1,214.00",
-      family: "$1,833.00"
-    },
-    coverage: {
-      officeVisit: "$0",
-      specialist: "$0",
-      inpatient: "Ded + 50%",
-      outpatient: "Ded + 50%",
-      urgentCare: "$0",
-      deductible: "$1,000 / $2,000",
-      maxOop: "$5,000 / $10,000",
-      coinsurance: "50%",
-      prescriptions: "$20/$40/$60"
-    }
-  },
-  {
-    carrier: "CEC",
-    planName: "Traditional 5000/5000",
-    premiums: {
-      eeOnly: "$595.00",
-      eeSpouse: "$1,190.00",
-      eeChild: "$1,071.00",
-      family: "$1,725.00"
-    },
-    coverage: {
-      officeVisit: "$30",
-      specialist: "$50",
-      inpatient: "Ded + 50%",
-      outpatient: "Ded + 50%",
-      urgentCare: "$75",
-      deductible: "$5,000 / $10,000",
-      maxOop: "$5,000 / $10,000",
-      coinsurance: "0%",
-      prescriptions: "$20/$40/$60"
     }
   }
 ];
