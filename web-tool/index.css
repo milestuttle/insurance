@@ -539,6 +539,21 @@ select, input[type="number"] {
   margin-top: 0.4rem;
   padding-top: 0.4rem;
   border-top: 1px solid var(--table-border);
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+#carrier-features-container .comparison-table {
+  table-layout: fixed;
+}
+
+#carrier-features-container .comparison-table th:first-child,
+#carrier-features-container .comparison-table td:first-child {
+  width: 22%;
+}
+
+#carrier-features-container .comparison-table tr.cf-open td {
+  white-space: normal;
 }
 
 .comparison-table tbody tr.cf-open .cf-detail {
