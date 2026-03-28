@@ -11,7 +11,7 @@ let costView = "monthly"; // "monthly", "annual-low", "annual-med", "annual-high
 let focusMode = false;
 let selectedForCompare = new Set();
 let hideIdenticalRows = false;
-let baselineMode = true;
+let baselineMode = false;
 let sortMetric = "carrier_then_premium"; // or "deductible", "coinsurance", etc.
 let sortAscending = true;
 
@@ -122,6 +122,7 @@ function initControls() {
       else enabledCarriers.delete(carrier);
       renderTables();
       renderTable();
+      renderCarrierFeatures();
     });
     
     label.appendChild(cb);
@@ -448,7 +449,8 @@ function renderTable() {
 
 function renderCarrierFeatures() {
   const container = document.getElementById('carrier-features-container');
-  const carriers = ['CEBT', 'PERACare', 'CEC'];
+  const carriers = ['CEBT', 'PERACare', 'CEC'].filter(c => enabledCarriers.has(c));
+  container.innerHTML = '';
 
   const table = document.createElement('table');
   table.className = 'comparison-table';
