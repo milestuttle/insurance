@@ -452,6 +452,7 @@ select, input[type="number"] {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
+  table-layout: fixed;
 }
 
 .premium-table thead th {
@@ -463,6 +464,9 @@ select, input[type="number"] {
   color: var(--text-secondary);
   border-bottom: 1px solid var(--card-border);
 }
+
+.premium-table thead th:first-child { width: 30%; }
+.premium-table thead th:not(:first-child) { width: 17.5%; }
 
 .pt-col-right {
   text-align: right;
