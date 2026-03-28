@@ -141,7 +141,7 @@ function initControls() {
     'monthly': 'Shows the raw monthly premium minus employer contributions.',
     'annual-low': 'Annual Premium + $0 out-of-pocket (preventative care only).',
     'annual-med': 'Annual Premium + $1,000 estimated out-of-pocket costs.',
-    'annual-high': "Annual Premium + exactly the plan's Max Out-of-Pocket limit (worst-case scenario)."
+    'annual-high': "Annual Premium + up to $10,000 estimated out-of-pocket (high utilization scenario)."
   };
 
   const segBtns = document.querySelectorAll('.seg-btn');
