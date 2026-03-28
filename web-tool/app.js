@@ -349,7 +349,14 @@ function renderTable() {
   });
   
   if (visiblePlans.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 2rem;">No data.</td></tr>';
+    const noDataTr = document.createElement('tr');
+    const noDataTd = document.createElement('td');
+    noDataTd.colSpan = visiblePlans.length + 1;
+    noDataTd.style.textAlign = 'center';
+    noDataTd.style.padding = '2rem';
+    noDataTd.textContent = 'No data.';
+    noDataTr.appendChild(noDataTd);
+    tbody.appendChild(noDataTr);
     return;
   }
   
