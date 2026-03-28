@@ -508,3 +508,52 @@ select, input[type="number"] {
 .pt-plan-name {
   font-weight: 500;
 }
+
+/* Carrier Feature Comparison */
+.cf-chevron {
+  display: inline-block;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  transition: transform 0.2s;
+  margin-right: 0.35rem;
+}
+
+.comparison-table tbody tr.cf-open .cf-chevron {
+  transform: rotate(180deg);
+}
+
+.cf-headline {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.comparison-table tbody tr:hover .cf-headline {
+  color: var(--accent-indigo);
+}
+
+.cf-detail {
+  display: none;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--table-border);
+}
+
+.comparison-table tbody tr.cf-open .cf-detail {
+  display: block;
+}
+
+.cf-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-top: 0.35rem;
+}
+
+.cf-tag-CEBT     { background: rgba(79, 70, 229, 0.1); color: var(--accent-indigo); }
+.cf-tag-PERACare { background: rgba(5, 150, 105, 0.1); color: var(--positive-emerald); }
+.cf-tag-CEC      { background: rgba(234, 88, 12, 0.1); color: var(--cec-amber); }
