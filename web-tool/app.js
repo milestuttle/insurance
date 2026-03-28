@@ -211,12 +211,7 @@ function renderCards() {
     // Carrier section title
     const rowTitle = document.createElement('h3');
     rowTitle.textContent = displayName(carrier) + " Plans";
-    rowTitle.style.marginTop = index === 0 ? '0' : '3rem';
-    rowTitle.style.marginBottom = '1.5rem';
-    rowTitle.style.fontWeight = '600';
-    rowTitle.style.borderBottom = '1px solid var(--card-border)';
-    rowTitle.style.paddingBottom = '0.5rem';
-    rowTitle.style.color = 'var(--text-secondary)';
+    rowTitle.className = index === 0 ? 'carrier-section-title first-carrier' : 'carrier-section-title';
     
     const grid = document.createElement('div');
     grid.className = 'cards-grid';

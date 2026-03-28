@@ -57,6 +57,32 @@ h2 {
   font-size: 1rem;
   margin-bottom: 2rem;
 }
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+.section-header > div:first-child .section-desc {
+  margin-bottom: 0;
+}
+.section-header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.carrier-section-title {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+.carrier-section-title.first-carrier {
+  margin-top: 0;
+}
+.carrier-section-title:not(.first-carrier) {
+  margin-top: 3rem;
+}
 
 /* Layout */
 .app-container {
