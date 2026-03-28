@@ -194,7 +194,6 @@ function initControls() {
 
 function renderCards() {
   const container = document.getElementById('cards-container');
-  container.classList.remove('cards-grid');
   container.innerHTML = '';
 
   const baselinePlan = insuranceData.find(p => p.planName === baselinePlanName) || insuranceData[0];
