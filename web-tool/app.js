@@ -95,13 +95,9 @@ const sortInsuranceData = () => {
   });
 };
 
-// Initial sort
-sortInsuranceData();
-
-// Set default baseline dynamic
-if (insuranceData.length > 0) baselinePlanName = insuranceData[0].planName;
-
 document.addEventListener('DOMContentLoaded', () => {
+  sortInsuranceData();
+  if (insuranceData.length > 0) baselinePlanName = insuranceData[0].planName;
   initControls();
   renderCards();
   renderTable();
