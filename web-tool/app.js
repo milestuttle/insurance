@@ -39,6 +39,12 @@ const parseCoverageValue = (str) => {
   return match ? parseFloat(match[0].replace(/,/g, '')) : Infinity;
 };
 
+const escapeHtml = (str) => String(str)
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;');
+
 const getCalculatedCost = (plan, tier) => {
   const basePrem = parseCurrency(plan.premiums[tier]);
   const netPrem = Math.max(0, basePrem - employerContribution);
@@ -224,11 +230,17 @@ function renderCards() {
       card.className = `plan-card provider-${plan.carrier}`;
       
       const isSelected = selectedForCompare.has(plan.planName);
-      card.innerHTML = `
-        <label class="card-checkbox-label" title="Select for Compare Mode">
-          <input type="checkbox" class="compare-checkbox" value="${plan.planName}" ${isSelected ? 'checked' : ''} /> Compare
-        </label>
-      `;
+      const checkboxLabel = document.createElement('label');
+      checkboxLabel.className = 'card-checkbox-label';
+      checkboxLabel.title = 'Select for Compare Mode';
+      const checkboxInput = document.createElement('input');
+      checkboxInput.type = 'checkbox';
+      checkboxInput.className = 'compare-checkbox';
+      checkboxInput.value = plan.planName;
+      checkboxInput.checked = isSelected;
+      checkboxLabel.appendChild(checkboxInput);
+      checkboxLabel.appendChild(document.createTextNode(' Compare'));
+      card.appendChild(checkboxLabel);
 
       // The rest of the card content
       const content = document.createElement('div');
@@ -255,8 +267,8 @@ function renderCards() {
 
       content.innerHTML = `
         <div class="card-header">
-          <span class="carrier-badge">${displayName(plan.carrier)}</span>
-          <h3 class="card-title">${plan.planName}</h3>
+          <span class="carrier-badge">${escapeHtml(displayName(plan.carrier))}</span>
+          <h3 class="card-title">${escapeHtml(plan.planName)}</h3>
         </div>
         <ul class="premium-list">
           <li class="premium-item">
@@ -332,7 +344,7 @@ function renderTable() {
       th.style.textDecorationColor = 'currentColor';
       th.style.textUnderlineOffset = '4px';
     }
-    th.innerHTML = `${displayName(plan.carrier)}<br><span style="font-size:0.75rem;font-weight:400;text-transform:none;">${plan.planName}</span>`;
+    th.innerHTML = `${escapeHtml(displayName(plan.carrier))}<br><span style="font-size:0.75rem;font-weight:400;text-transform:none;">${escapeHtml(plan.planName)}</span>`;
     headRow.appendChild(th);
   });
   
@@ -409,9 +421,12 @@ function renderTable() {
       }
       
       if (valClass) {
-        td.innerHTML = `<span class="${valClass}">${rawVal}</span>`;
+        const span = document.createElement('span');
+        span.className = valClass;
+        span.textContent = rawVal ?? '';
+        td.appendChild(span);
       } else {
-        td.textContent = rawVal;
+        td.textContent = rawVal ?? '';
       }
       
       tr.appendChild(td);
