@@ -340,9 +340,10 @@ function renderTable() {
   });
   
   if (visiblePlans.length === 0) {
+    tbody.innerHTML = '';
     const noDataTr = document.createElement('tr');
     const noDataTd = document.createElement('td');
-    noDataTd.colSpan = visiblePlans.length + 1;
+    noDataTd.colSpan = headRow.children.length;
     noDataTd.style.textAlign = 'center';
     noDataTd.style.padding = '2rem';
     noDataTd.textContent = 'No data.';
