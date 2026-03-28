@@ -70,20 +70,6 @@ h2 {
   display: flex;
   gap: 0.5rem;
 }
-.carrier-section-title {
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  border-bottom: 1px solid var(--card-border);
-  padding-bottom: 0.5rem;
-  color: var(--text-secondary);
-}
-.carrier-section-title.first-carrier {
-  margin-top: 0;
-}
-.carrier-section-title:not(.first-carrier) {
-  margin-top: 3rem;
-}
-
 /* Layout */
 .app-container {
   max-width: 1400px;
@@ -128,125 +114,6 @@ h2 {
 
 .section {
   margin-bottom: 5rem;
-}
-
-/* Cards Grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-
-.plan-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 1.5rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.plan-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-  border-color: rgba(0, 0, 0, 0.15);
-}
-
-/* Provider Card Accents */
-.plan-card.provider-CEBT {
-  border-color: rgba(79, 70, 229, 0.3);
-}
-.plan-card.provider-CEBT::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: var(--accent-indigo);
-}
-
-.plan-card.provider-PERACare {
-  border-color: rgba(5, 150, 105, 0.3);
-}
-.plan-card.provider-PERACare::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: var(--positive-emerald);
-}
-
-.plan-card.provider-CEC {
-  border-color: rgba(234, 88, 12, 0.3);
-}
-.plan-card.provider-CEC::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: var(--cec-amber);
-}
-
-/* Card Header */
-.card-header {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--card-border);
-}
-
-.carrier-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.05); /* default light bg */
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.provider-CEBT .carrier-badge {
-  background: var(--accent-indigo); color: white;
-}
-.provider-PERACare .carrier-badge {
-  background: var(--positive-emerald); color: white;
-}
-.provider-CEC .carrier-badge {
-  background: var(--cec-amber); color: white;
-}
-
-.card-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.4;
-}
-
-/* Premium List */
-.premium-list {
-  list-style: none;
-}
-
-.premium-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  font-size: 0.9375rem;
-}
-
-.premium-label {
-  color: var(--text-secondary);
-}
-
-.premium-val {
-  font-weight: 500;
-  color: var(--accent-teal);
-}
-
-.provider-CEBT .premium-val {
-  color: var(--accent-indigo);
-}
-.provider-PERACare .premium-val {
-  color: var(--positive-emerald);
-}
-.provider-CEC .premium-val {
-  color: var(--cec-amber);
 }
 
 /* Table Wrapper */
@@ -491,29 +358,6 @@ select, input[type="number"] {
   border-color: rgba(0,0,0,0.1);
 }
 
-/* Card Checkbox */
-.card-checkbox-label {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(255,255,255,0.8);
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid var(--card-border);
-  z-index: 5;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  transition: opacity 0.2s;
-}
-.card-checkbox-label input {
-  accent-color: var(--accent-teal);
-  cursor: pointer;
-}
 .checkbox-group {
   display: flex;
   gap: 1rem;
