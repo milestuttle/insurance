@@ -592,7 +592,7 @@ select, input[type="number"] {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
-  z-index: 100;
+  z-index: 1000;
   align-items: center;
   justify-content: center;
   padding: 1rem;
@@ -603,7 +603,7 @@ select, input[type="number"] {
 }
 
 .modal-panel {
-  background: #ffffff;
+  background: #ffffff; /* solid white to prevent content bleed-through on the backdrop */
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   max-width: 680px;
