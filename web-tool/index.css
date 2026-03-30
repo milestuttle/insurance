@@ -572,3 +572,116 @@ select, input[type="number"] {
 .cf-tag-CEBT     { background: rgba(79, 70, 229, 0.1); color: var(--accent-indigo); }
 .cf-tag-PERACare { background: rgba(5, 150, 105, 0.1); color: var(--positive-emerald); }
 .cf-tag-CEC      { background: rgba(234, 88, 12, 0.1); color: var(--cec-amber); }
+
+/* Help Button in Header */
+.header-content {
+  position: relative;
+}
+
+.help-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.875rem;
+  padding: 0.4rem 1rem;
+}
+
+/* Help Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-panel {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--table-border);
+  flex-shrink: 0;
+}
+
+.modal-header h2 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 1.5rem 2rem 2rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-body h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.35rem;
+  color: var(--text-primary);
+}
+
+.modal-body h3:first-child {
+  margin-top: 0;
+}
+
+.modal-body p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.modal-body ul {
+  padding-left: 1.25rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.modal-body li {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.35rem;
+}
+
+.modal-body strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
