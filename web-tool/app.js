@@ -203,6 +203,30 @@ function initControls() {
     renderTables();
     renderTable();
   });
+
+  // Help modal
+  const helpBtn = document.getElementById('help-btn');
+  const helpModal = document.getElementById('help-modal');
+  const helpModalClose = document.getElementById('help-modal-close');
+
+  const openModal = () => {
+    helpModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    helpModal.querySelector('.modal-panel').focus();
+  };
+  const closeModal = () => {
+    helpModal.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  helpBtn.addEventListener('click', openModal);
+  helpModalClose.addEventListener('click', closeModal);
+  helpModal.addEventListener('click', (e) => {
+    if (e.target === helpModal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
 }
 
 function renderTables() {
