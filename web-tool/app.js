@@ -217,6 +217,11 @@ function initControls() {
   const closeModal = () => {
     helpModal.classList.remove('open');
     document.body.style.overflow = '';
+    helpBtn.focus();
+  };
+
+  const onModalKeyDown = (e) => {
+    if (e.key === 'Escape' && helpModal.classList.contains('open')) closeModal();
   };
 
   helpBtn.addEventListener('click', openModal);
@@ -224,9 +229,7 @@ function initControls() {
   helpModal.addEventListener('click', (e) => {
     if (e.target === helpModal) closeModal();
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
+  document.addEventListener('keydown', onModalKeyDown);
 }
 
 function renderTables() {
