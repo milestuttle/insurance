@@ -23,7 +23,7 @@ An interactive web tool for evaluating health insurance rates and coverage acros
 
 ## A note on the data
 
-Rates reflect carrier quotes for the current plan year. All plan data is stored in `web-tool/data.js`. Contact the benefits team with any questions or corrections before relying on figures for decision-making.
+Rates reflect carrier quotes for the current plan year. Contact the benefits team with any questions or corrections before relying on figures for decision-making.
 
 ## Confidentiality
 
