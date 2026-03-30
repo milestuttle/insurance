@@ -20,6 +20,7 @@
         <div class="legend">
           <span class="legend-item"><span class="swatch current"></span> Current Provider (CEBT)</span>
         </div>
+        <button id="help-btn" class="btn-secondary help-btn" aria-label="Open help guide">? Help</button>
       </div>
     </header>
 
@@ -107,6 +108,60 @@
     <footer class="footer">
       <p>Confidential & Proprietary. Built for Internal Review.</p>
     </footer>
+  </div>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="help-modal-title">How to use this tool</h2>
+        <button id="help-modal-close" class="modal-close" aria-label="Close help">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <h3>What is this tool?</h3>
+        <p>This is an interactive comparison tool for evaluating health insurance options for the current plan year. Use it to compare premiums, benefit structures, and carrier features across CEBT (your current provider), PERACare, and CEC/Harbor Bridge.</p>
+
+        <h3>Sections overview</h3>
+        <ul>
+          <li><strong>Premium Overview</strong> — Monthly and utilization-adjusted costs by enrollment tier for every plan</li>
+          <li><strong>Carrier Feature Comparison</strong> — Network structure, funding model, financial risk, and administrative burden for each carrier. Click any row to expand details.</li>
+          <li><strong>Detailed Coverage Comparison</strong> — Deductibles, copays, coinsurance, out-of-pocket maximums, and prescription tiers side by side</li>
+        </ul>
+
+        <h3>Employer Contribution</h3>
+        <p>Enter a monthly dollar amount in the Employer Contribution field to subtract the district's share from all premium figures. For example, entering $400 will reduce every displayed premium by $400, showing each employee's net cost. Figures update instantly.</p>
+
+        <h3>Cost View</h3>
+        <p>Toggle between four views using the segmented control:</p>
+        <ul>
+          <li><strong>Monthly</strong> — Raw monthly premium minus employer contribution</li>
+          <li><strong>Low Utilization</strong> — Annual premium with $0 estimated out-of-pocket (preventative care only)</li>
+          <li><strong>Medium Utilization</strong> — Annual premium + ~$1,000 out-of-pocket</li>
+          <li><strong>High Utilization</strong> — Annual premium + up to $10,000 out-of-pocket (capped at each plan's max OOP)</li>
+        </ul>
+
+        <h3>Carrier Filter</h3>
+        <p>Use the checkboxes to show or hide individual carriers. Hiding a carrier removes it from all three sections simultaneously — Premium Overview, Carrier Features, and Detailed Coverage.</p>
+
+        <h3>Baseline Mode</h3>
+        <p>Click "Baseline Mode: OFF" to turn it on, then click any plan row in the Premium Overview to set it as your reference point. All other plans will show colored difference badges next to each premium: green means cheaper than the baseline, red means more expensive. The baseline row is highlighted with an indigo border. Click a different row to change the baseline.</p>
+
+        <h3>Compare Mode</h3>
+        <p>Check the small checkbox to the left of any plan name to select it. Once you've checked the plans you want to focus on, click "Compare Mode: OFF" to activate it — only the selected plans will remain visible across the Premium Overview and Detailed Coverage table. Turn Compare Mode off to return to the full view.</p>
+
+        <h3>Differences Only</h3>
+        <p>In the Detailed Coverage table, click "Differences Only: OFF" to hide rows where every currently visible plan has the same value. This is most useful when you've narrowed down to a few plans using Compare Mode and want to focus on what actually distinguishes them.</p>
+
+        <h3>Reading the coverage table</h3>
+        <p>Click any row label (e.g., "Deductible") to sort all plans by that metric. Click again to reverse the sort order. A "Reset Sort" button will appear when a custom sort is active.</p>
+        <p>When Baseline Mode is on, values in the coverage table are color-coded: <strong style="color:#059669;">green</strong> means better than the baseline plan, <strong style="color:#e11d48;">red</strong> means worse. No color means the value is identical to the baseline.</p>
+
+        <h3>A note on the data</h3>
+        <p>Rates reflect carrier quotes for the current plan year. Contact the benefits team with any questions or corrections before relying on figures for decision-making.</p>
+
+      </div>
+    </div>
   </div>
 
   <script type="module" src="app.js"></script>
