@@ -241,6 +241,7 @@ th.sticky-col {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  flex: 1;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
