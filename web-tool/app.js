@@ -10,7 +10,6 @@ let employerContribution = 0;
 let costView = "monthly"; // "monthly", "annual-low", "annual-med", "annual-high"
 let focusMode = false;
 let selectedForCompare = new Set();
-let hideIdenticalRows = false;
 let baselineMode = false;
 let sortMetric = "carrier_then_premium"; // or "deductible", "coinsurance", etc.
 let sortAscending = true;
@@ -182,18 +181,6 @@ function initControls() {
     renderTable();
   });
 
-  const diffBtn = document.getElementById('diff-only-btn');
-  diffBtn.addEventListener('click', () => {
-    hideIdenticalRows = !hideIdenticalRows;
-    if (hideIdenticalRows) {
-      diffBtn.textContent = "Differences Only: ON";
-      diffBtn.classList.add('active');
-    } else {
-      diffBtn.textContent = "Differences Only: OFF";
-      diffBtn.classList.remove('active');
-    }
-    renderTable();
-  });
 
   const resetSortBtn = document.getElementById('reset-sort-btn');
   resetSortBtn.addEventListener('click', () => {
@@ -406,12 +393,6 @@ function renderTable() {
   tbody.innerHTML = '';
   
   rows.forEach(rowDef => {
-    // Check if we hide identically matched rows
-    if (hideIdenticalRows && visiblePlans.length > 1) {
-      const allValues = visiblePlans.map(plan => plan.coverage[rowDef.key]);
-      const allIdentical = allValues.every(val => val === allValues[0]);
-      if (allIdentical) return; // Skip rendering row
-    }
 
     const tr = document.createElement('tr');
     
