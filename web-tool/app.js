@@ -422,6 +422,14 @@ function renderTable() {
     
     tr.appendChild(th);
     
+    // Ensure this row's values are structurally similar enough to compare
+    const getNumCount = (str) => {
+      const match = String(str || '').match(/\d+(,\d+)*(\.\d+)?/g);
+      return match ? match.length : 0;
+    };
+    const rowTokenCount = visiblePlans.length > 0 ? getNumCount(visiblePlans[0].coverage[rowDef.key]) : 0;
+    const isComparable = visiblePlans.every(p => getNumCount(p.coverage[rowDef.key]) === rowTokenCount);
+
     // Evaluate baseline value for this row
     const baseValRaw = baselinePlan.coverage[rowDef.key];
     const baseValParsed = parseCoverageValue(baseValRaw);
@@ -434,7 +442,7 @@ function renderTable() {
       const parsedVal = parseCoverageValue(rawVal);
       
       let valClass = '';
-      if (plan.planName !== baselinePlanName) {
+      if (isComparable && plan.planName !== baselinePlanName) {
         if (parsedVal < baseValParsed) valClass = 'val-better';
         else if (parsedVal > baseValParsed) valClass = 'val-worse';
         else valClass = 'val-neutral';
