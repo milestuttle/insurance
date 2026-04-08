@@ -234,10 +234,10 @@ const insuranceData = [
     carrier: "CEC",
     planName: "Traditional 5000/5000",
     premiums: {
-      eeOnly: "$595.00",
-      eeSpouse: "$1,190.00",
-      eeChild: "$1,071.00",
-      family: "$1,725.00"
+      eeOnly: "$651.00",
+      eeSpouse: "$1,301.00",
+      eeChild: "$1,108.00",
+      family: "$1,673.00"
     },
     coverage: {
       officeVisit: "$30",
@@ -247,7 +247,7 @@ const insuranceData = [
       urgentCare: "$75",
       deductible: "$5,000/$10,000",
       maxOop: "$5,000/$10,000",
-      coinsurance: "30%",
+      coinsurance: "0%",
       prescriptions: "$0/$75/$100"
     }
   },
@@ -299,49 +299,49 @@ export const carrierFeatures = [
   {
     feature: "Network Structure",
     carriers: {
-      CEBT:     { headline: "Broad PPO \u00b7 United Healthcare", detail: "High flexibility. Employees can see specialists without referrals and have out-of-network coverage options.", tag: "High Flexibility" },
-      PERACare: { headline: "Closed HMO \u00b7 Kaiser",           detail: "Highly coordinated care. Employees must use Kaiser facilities and doctors (except for emergencies/urgent care).", tag: "Coordinated Care" },
-      CEC:      { headline: "Broad PPO \u00b7 First Health",      detail: "As a massive national network (owned by Aetna), this provides a similar level of provider choice as your current CEBT network.", tag: "High Flexibility" }
+      CEBT: { headline: "Broad PPO \u00b7 United Healthcare", detail: "High flexibility. Employees can see specialists without referrals and have out-of-network coverage options.", tag: "High Flexibility" },
+      PERACare: { headline: "Closed HMO \u00b7 Kaiser", detail: "Highly coordinated care. Employees must use Kaiser facilities and doctors (except for emergencies/urgent care).", tag: "Coordinated Care" },
+      CEC: { headline: "Broad PPO \u00b7 First Health", detail: "As a massive national network (owned by Aetna), this provides a similar level of provider choice as your current CEBT network.", tag: "High Flexibility" }
     }
   },
   {
     feature: "Plan Philosophy & Design",
     carriers: {
-      CEBT:     { headline: "Traditional PPO",                detail: "Standard off-the-shelf plans. Employees pay a set copay for office visits and a percentage-based coinsurance for major medical events." },
+      CEBT: { headline: "Traditional PPO", detail: "Standard off-the-shelf plans. Employees pay a set copay for office visits and a percentage-based coinsurance for major medical events." },
       PERACare: { headline: "Care Coordination & Prevention", detail: "Higher overall deductibles, but offsets this by eliminating barriers to routine care (e.g., $0 copays for visits, integrated pharmacy)." },
-      CEC:      { headline: "Tailored / Proprietary Suites",  detail: '"Simplicity" plans focus on $0 barriers to everyday care; "Traditional" and "HSA" plans offer classic structures for different employee needs.' }
+      CEC: { headline: "Tailored / Proprietary Suites", detail: '"Simplicity" plans focus on $0 barriers to everyday care; "Traditional" and "HSA" plans offer classic structures for different employee needs.' }
     }
   },
   {
     feature: "Funding Mechanism",
     carriers: {
-      CEBT:     { headline: "Fully Insured \u00b7 Pooled Trust", detail: "You pay a fixed monthly premium, and the trust takes on the liability of paying out all claims.", tag: "Fixed Premium" },
-      PERACare: { headline: "Fully Insured \u00b7 Public Pool",  detail: "Similar to CEBT, you pay a fixed premium based on the pool's massive economies of scale, and PERA takes the risk.", tag: "Fixed Premium" },
-      CEC:      { headline: "Level-Funded \u00b7 Alternative",   detail: "You pay a fixed monthly amount that covers admin, stop-loss insurance, and builds a dedicated claims reserve for your specific group.", tag: "Shared Risk / Reward" }
+      CEBT: { headline: "Fully Insured \u00b7 Pooled Trust", detail: "You pay a fixed monthly premium, and the trust takes on the liability of paying out all claims.", tag: "Fixed Premium" },
+      PERACare: { headline: "Fully Insured \u00b7 Public Pool", detail: "Similar to CEBT, you pay a fixed premium based on the pool's massive economies of scale, and PERA takes the risk.", tag: "Fixed Premium" },
+      CEC: { headline: "Level-Funded \u00b7 Alternative", detail: "You pay a fixed monthly amount that covers admin, stop-loss insurance, and builds a dedicated claims reserve for your specific group.", tag: "Shared Risk / Reward" }
     }
   },
   {
     feature: "Financial Risk & Reward",
     carriers: {
-      CEBT:     { headline: "Standard market risk",                detail: "Standard annual market rate increases. If your employees are healthy and don't go to the doctor, the trust keeps the surplus." },
+      CEBT: { headline: "Standard market risk", detail: "Standard annual market rate increases. If your employees are healthy and don't go to the doctor, the trust keeps the surplus." },
       PERACare: { headline: "Highly stable \u00b7 statewide pool", detail: "Insulated by a massive statewide pool, renewals tend to be very stable. However, you do not get cash back for low claims." },
-      CEC:      { headline: "Refund if claims run low",            detail: "If your group's claims run lower than expected, the district receives a portion of the unspent claims reserve back as a cash refund at year-end." }
+      CEC: { headline: "Refund if claims run low", detail: "If your group's claims run lower than expected, the district receives a portion of the unspent claims reserve back as a cash refund at year-end." }
     }
   },
   {
     feature: "Admin Burden & Support",
     carriers: {
-      CEBT:     { headline: "Standard \u00b7 District Manages", detail: "Your district manages open enrollment, carrier files, COBRA, and general benefits administration." },
+      CEBT: { headline: "Standard \u00b7 District Manages", detail: "Your district manages open enrollment, carrier files, COBRA, and general benefits administration." },
       PERACare: { headline: "Very low \u00b7 PERA handles it", detail: "PERA handles enrollment files, premium billing, and COBRA administration directly." },
-      CEC:      { headline: "Supported via tech platform",   detail: "Provides a proprietary digital Benefit Management System and dedicated enrollment coordinators to help manage complexity." }
+      CEC: { headline: "Supported via tech platform", detail: "Provides a proprietary digital Benefit Management System and dedicated enrollment coordinators to help manage complexity. A call center coordinates open enrollment." }
     }
   },
   {
     feature: "Long-Term Cost Containment",
     carriers: {
-      CEBT:     { headline: "Standard carrier management", detail: "Relies on United Healthcare's broad network discounts to control the cost of claims." },
-      PERACare: { headline: "Integrated care model",       detail: "Relies on Kaiser's integrated system (where they are both insurer and provider) to keep patients healthy and avoid catastrophic claims." },
-      CEC:      { headline: "Aggressive cost management",  detail: "Actively manages high-cost claims through specialized Pharmacy Benefit Management (PBM) to drive down the cost of specialty drugs." }
+      CEBT: { headline: "Standard carrier management", detail: "Relies on United Healthcare's broad network discounts to control the cost of claims." },
+      PERACare: { headline: "Integrated care model", detail: "Relies on Kaiser's integrated system (where they are both insurer and provider) to keep patients healthy and avoid catastrophic claims." },
+      CEC: { headline: "Aggressive cost management", detail: "Actively manages high-cost claims through specialized Pharmacy Benefit Management (PBM) to drive down the cost of specialty drugs." }
     }
   }
 ];
