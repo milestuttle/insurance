@@ -4,13 +4,12 @@ import insuranceData, { carrierFeatures } from './data.js';
 insuranceData.forEach(p => p.planName = p.planName.trim());
 
 // Global State
-let baselinePlanName = "";
 let enabledCarriers = new Set(["CEBT", "PERACare", "CEC"]);
 let employerContribution = 0;
 let costView = "monthly"; // "monthly", "annual-low", "annual-med", "annual-high"
 let focusMode = false;
 let selectedForCompare = new Set();
-let baselineMode = false;
+let baselinePlanName = null;
 let sortMetric = "carrier_then_premium"; // or "deductible", "coinsurance", etc.
 let sortAscending = true;
 
@@ -112,7 +111,6 @@ const sortInsuranceData = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   sortInsuranceData();
-  if (insuranceData.length > 0) baselinePlanName = insuranceData[0].planName;
   initControls();
   renderTables();
   renderTable();
@@ -182,20 +180,6 @@ function initControls() {
     renderTable();
   });
 
-  const baselineBtn = document.getElementById('baseline-mode-btn');
-  baselineBtn.addEventListener('click', () => {
-    baselineMode = !baselineMode;
-    if (baselineMode) {
-      baselineBtn.textContent = "Baseline Mode: ON";
-      baselineBtn.classList.add('active');
-    } else {
-      baselineBtn.textContent = "Baseline Mode: OFF";
-      baselineBtn.classList.remove('active');
-    }
-    renderTables();
-    renderTable();
-  });
-
 
   const resetSortBtn = document.getElementById('reset-sort-btn');
   resetSortBtn.addEventListener('click', () => {
@@ -242,12 +226,16 @@ function renderTables() {
   const carriers = [...new Set(insuranceData.map(p => p.carrier))];
 
   const getDiffHtml = (tier, plan) => {
-    if (!baselineMode) return '';
+    if (!baselinePlanName) return '';
     if (plan.planName === baselinePlanName) return `<span class="diff-badge diff-neutral">Baseline</span>`;
-    const diff = getCalculatedCost(plan, tier) - getCalculatedCost(baselinePlan, tier);
+    
+    let baselinePlanObj = insuranceData.find(p => p.planName === baselinePlanName);
+    if (!baselinePlanObj) baselinePlanObj = insuranceData[0];
+
+    const diff = getCalculatedCost(plan, tier) - getCalculatedCost(baselinePlanObj, tier);
     if (Math.abs(diff) < 1) return `<span class="diff-badge diff-neutral">$0</span>`;
-    if (diff > 0) return `<span class="diff-badge diff-negative">+$${Math.abs(diff).toFixed(0)}</span>`;
-    return `<span class="diff-badge diff-positive">-$${Math.abs(diff).toFixed(0)}</span>`;
+    if (diff > 0) return `<span class="val-worse" style="margin-left: 0.5rem; font-size: 0.85rem;">+$${Math.abs(diff).toFixed(0)}</span>`;
+    return `<span class="val-better" style="margin-left: 0.5rem; font-size: 0.85rem;">-$${Math.abs(diff).toFixed(0)}</span>`;
   };
 
   let anyVisible = false;
@@ -291,14 +279,17 @@ function renderTables() {
     const tbody = document.createElement('tbody');
     carrierPlans.forEach(plan => {
       const tr = document.createElement('tr');
-      if (baselineMode && plan.planName === baselinePlanName) tr.classList.add('pt-baseline');
+      if (plan.planName === baselinePlanName) tr.classList.add('pt-baseline');
       const hlType = getHighlightClassType(plan.planName);
       if (hlType) tr.classList.add(`row-highlight-${hlType}`);
 
       tr.addEventListener('click', (e) => {
         if (e.target.type === 'checkbox') return;
-        if (!baselineMode) return;
-        baselinePlanName = plan.planName;
+        if (baselinePlanName === plan.planName) {
+          baselinePlanName = null;
+        } else {
+          baselinePlanName = plan.planName;
+        }
         renderTables();
         renderTable();
       });
@@ -376,7 +367,7 @@ function renderTable() {
     const hlType = getHighlightClassType(plan.planName);
     if (hlType) th.classList.add(`col-highlight-${hlType}`);
     
-    if (baselineMode && plan.planName === baselinePlanName) {
+    if (plan.planName === baselinePlanName) {
       th.style.textDecoration = 'underline';
       th.style.textDecorationColor = 'currentColor';
       th.style.textUnderlineOffset = '4px';
@@ -463,7 +454,7 @@ function renderTable() {
       const parsedVal = parseCoverageValue(rawVal);
       
       let valClass = '';
-      if (isComparable && plan.planName !== baselinePlanName) {
+      if (isComparable && baselinePlanName && plan.planName !== baselinePlanName) {
         if (parsedVal < baseValParsed) valClass = 'val-better';
         else if (parsedVal > baseValParsed) valClass = 'val-worse';
         else valClass = 'val-neutral';
