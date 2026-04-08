@@ -398,6 +398,40 @@ select, input[type="number"] {
   color: var(--text-secondary);
 }
 
+/* Plan Highlights */
+.plan-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.badge-current {
+  background: rgba(79, 70, 229, 0.1);
+  color: var(--accent-indigo);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+}
+.badge-rec {
+  background: rgba(15, 118, 110, 0.1);
+  color: var(--accent-teal);
+  border: 1px solid rgba(15, 118, 110, 0.2);
+}
+.row-highlight-current, .col-highlight-current {
+  background-color: rgba(79, 70, 229, 0.06) !important;
+}
+.premium-table tbody tr.row-highlight-current:hover {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+}
+.row-highlight-rec, .col-highlight-rec {
+  background-color: rgba(15, 118, 110, 0.06) !important;
+}
+.premium-table tbody tr.row-highlight-rec:hover {
+  background-color: rgba(15, 118, 110, 0.1) !important;
+}
+
 /* Heatmap Texts */
 .val-better {
   color: var(--positive-emerald) !important;

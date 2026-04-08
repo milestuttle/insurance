@@ -14,6 +14,21 @@ let baselineMode = false;
 let sortMetric = "carrier_then_premium"; // or "deductible", "coinsurance", etc.
 let sortAscending = true;
 
+const currentPlans = new Set(['PPO4', 'PPO7', 'PPO9']);
+const recommendedPlans = new Set(['Simplicity 1000/3000', 'Simplicity 1000/5000', 'Traditional 5000/5000']);
+
+const getHighlightBadge = (planName) => {
+  if (currentPlans.has(planName)) return `<span class="plan-badge badge-current">Current</span>`;
+  if (recommendedPlans.has(planName)) return `<span class="plan-badge badge-rec">Recommended</span>`;
+  return '';
+};
+
+const getHighlightClassType = (planName) => {
+  if (currentPlans.has(planName)) return 'current';
+  if (recommendedPlans.has(planName)) return 'rec';
+  return '';
+};
+
 // Utility: parse currency
 const parseCurrency = (str) => {
   const num = parseFloat(str.replace(/[^0-9.-]+/g, ""));
@@ -278,6 +293,8 @@ function renderTables() {
     carrierPlans.forEach(plan => {
       const tr = document.createElement('tr');
       if (baselineMode && plan.planName === baselinePlanName) tr.classList.add('pt-baseline');
+      const hlType = getHighlightClassType(plan.planName);
+      if (hlType) tr.classList.add(`row-highlight-${hlType}`);
 
       tr.addEventListener('click', (e) => {
         if (e.target.type === 'checkbox') return;
@@ -301,7 +318,7 @@ function renderTables() {
       });
       const nameSpan = document.createElement('span');
       nameSpan.className = 'pt-plan-name';
-      nameSpan.textContent = plan.planName;
+      nameSpan.innerHTML = `${escapeHtml(plan.planName)}${getHighlightBadge(plan.planName)}`;
       nameTd.appendChild(cb);
       nameTd.appendChild(nameSpan);
       tr.appendChild(nameTd);
@@ -357,12 +374,15 @@ function renderTable() {
   visiblePlans.forEach(plan => {
     const th = document.createElement('th');
     th.classList.add(`col-${plan.carrier}`, `header-${plan.carrier}`);
+    const hlType = getHighlightClassType(plan.planName);
+    if (hlType) th.classList.add(`col-highlight-${hlType}`);
+    
     if (baselineMode && plan.planName === baselinePlanName) {
       th.style.textDecoration = 'underline';
       th.style.textDecorationColor = 'currentColor';
       th.style.textUnderlineOffset = '4px';
     }
-    th.innerHTML = `${escapeHtml(displayName(plan.carrier))}<br><span style="font-size:0.75rem;font-weight:400;text-transform:none;">${escapeHtml(plan.planName)}</span>`;
+    th.innerHTML = `${escapeHtml(displayName(plan.carrier))}<br><span style="font-size:0.75rem;font-weight:400;text-transform:none;">${escapeHtml(plan.planName)}</span>${getHighlightBadge(plan.planName)}`;
     headRow.appendChild(th);
   });
   
@@ -437,6 +457,8 @@ function renderTable() {
     visiblePlans.forEach(plan => {
       const td = document.createElement('td');
       td.classList.add(`col-${plan.carrier}`);
+      const hlType = getHighlightClassType(plan.planName);
+      if (hlType) td.classList.add(`col-highlight-${hlType}`);
       
       const rawVal = plan.coverage[rowDef.key];
       const parsedVal = parseCoverageValue(rawVal);
