@@ -34,9 +34,10 @@ const parseCoverageValue = (str) => {
   if (!str) return Infinity;
   if (str === "0%" || str === "$0" || str === "0") return 0;
   
-  // Try to find the first substantial number to sort by
-  const match = str.match(/\d+(,\d+)*(\.\d+)?/);
-  return match ? parseFloat(match[0].replace(/,/g, '')) : Infinity;
+  // Extract and sum all numbers to get a better comparative heuristic
+  const matches = String(str).match(/\d+(,\d+)*(\.\d+)?/g);
+  if (!matches) return Infinity;
+  return matches.reduce((sum, m) => sum + parseFloat(m.replace(/,/g, '')), 0);
 };
 
 const escapeHtml = (str) => String(str)
