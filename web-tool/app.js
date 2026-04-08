@@ -19,7 +19,6 @@ const recommendedPlans = new Set(['Simplicity 1000/3000', 'Simplicity 1000/5000'
 
 const getHighlightBadge = (planName) => {
   if (currentPlans.has(planName)) return `<span class="plan-badge badge-current">Current</span>`;
-  if (recommendedPlans.has(planName)) return `<span class="plan-badge badge-rec">Recommended</span>`;
   return '';
 };
 
